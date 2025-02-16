@@ -80,30 +80,26 @@ const Header: React.FC = () => {
       <nav className="header">
         <div className="branch-wrap" onClick={() => navigate("/")}>
           <img src="/beauty-logo.svg" alt="" />
-          <h4>Beauty-SC</h4>
+          <h4>BEAUTYSC</h4>
+        </div>
+
+        <div className="nav-wrap">
+          <a href="">Home</a>
+          <a href="">Voucher</a>
+          <a href="">For Sales</a>
+          <a href="">Products</a>
+          <a href="">Quiz Skin Q&A</a>
         </div>
 
         <div className="searchbar-wrap">
-          <TextField
-            color="info"
-            size="small"
-            style={{ color: "white", fontSize: "14px" }}
-            placeholder="Tìm kiếm bài viết..."
-            variant="outlined"
-            // onChange={(e) => setSearchKeyword(e.target.value)}
-            slotProps={{
-              input: {
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchOutlinedIcon />
-                  </InputAdornment>
-                ),
-              },
-            }}
-          />
+          <SearchOutlinedIcon />|
+          <div>
+            <img src="" alt="" />
+            US <span>(EN)</span>
+          </div>
         </div>
 
-        <div className="action-group-wrap">
+        {/* <div className="action-group-wrap">
           {(role === "ROLE_VOLUNTEER" || role === "ROLE_ADMIN") && (
             <IconButton
               style={{ color: "white", marginRight: "8px" }}
@@ -181,16 +177,7 @@ const Header: React.FC = () => {
               </MenuItem>
             )}
           </Menu>
-          <Button
-            style={{ background: "#222222" }}
-            color="primary"
-            variant="contained"
-            startIcon={<DriveFileRenameOutlineOutlinedIcon />}
-            onClick={() => navigate("/create-post")}
-          >
-            Đăng tin
-          </Button>
-        </div>
+        </div> */}
       </nav>
 
       <Dialog open={open} onClose={handleClose}>
