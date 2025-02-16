@@ -97,6 +97,9 @@ const Header: React.FC = () => {
             <img src="" alt="" />
             US <span>(EN)</span>
           </div>
+          <Button variant="text" href="/login">
+            Login
+          </Button>
         </div>
 
         {/* <div className="action-group-wrap">
