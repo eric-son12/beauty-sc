@@ -30,7 +30,11 @@ const SpecialOffer: React.FC = () => {
           variant="contained"
           fullWidth
           type="submit"
-          style={{ marginTop: "16px", color: "white" }}
+          style={{
+            marginTop: "16px",
+            color: "white",
+            background: "#fd5353",
+          }}
         >
           Find Branches
         </Button>

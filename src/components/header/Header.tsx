@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Dialog,
@@ -32,12 +32,27 @@ interface IChangePasswordForm {
 }
 
 const Header: React.FC = () => {
-  const token = localStorage.getItem("token");
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const openMenu = Boolean(anchorEl);
+  const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
+  const [visible, setVisible] = useState(true);
+
   const changePassword = useStore((store) => store.changePassword);
+
+  const token = localStorage.getItem("token");
+  const openMenu = Boolean(anchorEl);
   const role = localStorage.getItem("role");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [prevScrollPos]);
 
   const navigate = useNavigate();
   const logout = useStore((store) => store.logout);
@@ -77,7 +92,7 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <nav className="header">
+      <nav className={`header ${visible ? "visible" : "hidden"}`}>
         <div className="branch-wrap" onClick={() => navigate("/")}>
           <img src="/beauty-logo.svg" alt="" />
           <h4>BEAUTYSC</h4>

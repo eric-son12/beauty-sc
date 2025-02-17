@@ -34,12 +34,20 @@ footer {
   }
 
   .footer-info {
-    padding: 1rem 4rem;
+    position: relative;
+    padding: 4rem;
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
     justify-content: space-between;
     background: #ffbdbf;
     color: white;
+
+    .footer-bg {
+      position: absolute;
+      height: 75%;
+      right: 0;
+      bottom: 0;
+    }
 
     > div {
       display: flex;
@@ -48,12 +56,16 @@ footer {
       gap: 12px;
     }
 
+    .section-3 {
+      z-index: 9;
+    }
+
     a {
       font-size: 16px;
     }
 
     h3 {
-      font-size: 20px;
+      font-size: 26px;
       margin-bottom: 8px;
     }
 

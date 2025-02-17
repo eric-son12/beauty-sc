@@ -8,6 +8,15 @@
   gap: 1rem;
   padding: 1rem 2rem;
   background: #f2e0de;
+  transition: transform 0.3s ease-in-out;
+
+  &.hidden {
+    transform: translateY(-100%);
+  }
+
+  &.visible {
+    transform: translateY(0);
+  }
 
   .branch-wrap {
     display: flex;

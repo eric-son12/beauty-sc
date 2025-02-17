@@ -26,6 +26,8 @@ const Footer: React.FC = () => {
       </div>
 
       <div className="footer-info">
+        <img className="footer-bg" src="/footer-bg.svg" alt="" />
+
         <div className="section-1">
           <h3>How can we Help?</h3>
 

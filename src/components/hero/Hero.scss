@@ -44,5 +44,36 @@
 
   .react-multi-carousel-dot-list {
     bottom: 24px;
+
+    .react-multi-carousel-dot button {
+      width: 32px;
+      height: 5px;
+      border-radius: 2px;
+      border-width: 1px;
+    }
+  }
+
+  .react-multiple-carousel__arrow--left {
+    height: 100%;
+    border-radius: 0;
+    left: 0;
+    width: 56px;
+
+    &::before {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+
+  .react-multiple-carousel__arrow--right {
+    height: 100%;
+    border-radius: 0;
+    right: 0;
+    width: 56px;
+
+    &::before {
+      font-size: 18px;
+      font-weight: bold;
+    }
   }
 }
