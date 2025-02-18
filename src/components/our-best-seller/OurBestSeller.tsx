@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import Slider from "react-slick";
+
+import { Product } from "../../store/product";
+import { useStore } from "../../store";
 
 import "./OurBestSeller.scss";
 
 const OurBestSeller: React.FC = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    // slidesToScroll: 4,
-  };
+  const fetchBestSellersProducts = useStore(
+    (state) => state.fetchBestSellersProducts
+  );
+  const bestSellersProducts = useStore(
+    (state) => state.products.bestSellersProducts
+  );
+
+  useEffect(() => {
+    fetchBestSellersProducts();
+  }, []);
 
   return (
     <div className="our-best-seller-container">
@@ -71,7 +77,18 @@ const OurBestSeller: React.FC = () => {
           slidesToSlide={1}
           swipeable
         >
-          <div className="product-item">
+          {bestSellersProducts &&
+            bestSellersProducts.map((product: Product) => (
+              <div className="product-item" key={product.$id}>
+                <img src="/products/product-1.png" alt="category-item" />
+                <div className="product-info">
+                  <p className="name">{product.productName}</p>
+                  <p className="desc">{product.summary}</p>
+                  <p className="price">${product.price}</p>
+                </div>
+              </div>
+            ))}
+          {/* <div className="product-item">
             <img src="/products/product-1.png" alt="category-item" />
             <div className="product-info">
               <p className="name">
@@ -122,8 +139,9 @@ const OurBestSeller: React.FC = () => {
               </p>
               <p className="price">$76.00</p>
             </div>
-          </div>
+          </div> */}
         </Carousel>
+
         {/* <Slider {...settings}>
           <div className="product-item">
             <img src="/products/product-1.png" alt="category-item" />
