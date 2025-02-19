@@ -1,43 +1,14 @@
-import type { StoreGet, StoreSet } from "../store";
 import axios from "../utils/axiosConfig";
 
-export interface User {
-  role: string;
-  token: string;
-  username: string;
-}
+const BASE_URL = "https://spacesport.pro/api";
 
-export interface UserProfile {
-  username: string;
-  fullName: string;
-  email: string;
-  phone: string;
-  address: string;
-}
-export interface ProfileState {
-  user: User | undefined;
-  userProfile: UserProfile | undefined;
-  error: string | undefined;
-}
-
-export interface ProfileActions {
-  fetchProfile: () => Promise<void>;
-  updateProfile: (values: any) => Promise<void>;
-  register: (userBody: any, type: string) => Promise<void>;
-  login: (username: string, password: string) => Promise<void>;
-  logout: () => Promise<void>;
-  changePassword: (oldPassword: string, newPassword: string) => Promise<void>;
-}
-
-export const initialProfile: ProfileState = {
+export const initialProfile = {
   user: undefined,
   userProfile: undefined,
   error: undefined,
 };
 
-export function profileActions(set: StoreSet, get: StoreGet): ProfileActions {
-  const BASE_URL = "https://spacesport.pro/api";
-
+export function profileActions(set, get) {
   return {
     fetchProfile: async () => {
       set((state) => {
@@ -49,7 +20,7 @@ export function profileActions(set: StoreSet, get: StoreGet): ProfileActions {
         set((state) => {
           state.profile.userProfile = profile;
         });
-      } catch (error: any) {
+      } catch (error) {
         set((state) => {
           const message = error?.response?.data?.message || error?.message;
           state.notification.data.push({
@@ -80,7 +51,7 @@ export function profileActions(set: StoreSet, get: StoreGet): ProfileActions {
             content: "Update profile successfully",
           });
         });
-      } catch (error: any) {
+      } catch (error) {
         set((state) => {
           const message = error?.response?.data?.message || error?.message;
           state.notification.data.push({
@@ -94,7 +65,7 @@ export function profileActions(set: StoreSet, get: StoreGet): ProfileActions {
         });
       }
     },
-    register: async (userBody: any, type: string) => {
+    register: async (userBody, type) => {
       set((state) => {
         state.loading.isLoading = true;
       });
@@ -124,7 +95,7 @@ export function profileActions(set: StoreSet, get: StoreGet): ProfileActions {
             });
           }
         });
-      } catch (error: any) {
+      } catch (error) {
         set((state) => {
           const message = error?.response?.data?.message || error?.message;
           state.notification.data.push({
@@ -138,7 +109,7 @@ export function profileActions(set: StoreSet, get: StoreGet): ProfileActions {
         });
       }
     },
-    login: async (username: string, password: string) => {
+    login: async (username, password) => {
       set((state) => {
         state.loading.isLoading = true;
       });
@@ -161,7 +132,7 @@ export function profileActions(set: StoreSet, get: StoreGet): ProfileActions {
             status: "SUCCESS",
           });
         });
-      } catch (error: any) {
+      } catch (error) {
         set((state) => {
           const message = error?.response?.data?.message || error?.message;
           state.notification.data.push({
@@ -192,7 +163,7 @@ export function profileActions(set: StoreSet, get: StoreGet): ProfileActions {
             status: "SUCCESS",
           });
         });
-      } catch (error: any) {
+      } catch (error) {
         set((state) => {
           const message = error?.response?.data?.message || error?.message;
           state.notification.data.push({
@@ -206,7 +177,7 @@ export function profileActions(set: StoreSet, get: StoreGet): ProfileActions {
         });
       }
     },
-    changePassword: async (oldPassword: string, newPassword: string) => {
+    changePassword: async (oldPassword, newPassword) => {
       set((state) => {
         state.loading.isLoading = true;
       });
@@ -223,7 +194,7 @@ export function profileActions(set: StoreSet, get: StoreGet): ProfileActions {
             content: "Change password successfully",
           });
         });
-      } catch (error: any) {
+      } catch (error) {
         set((state) => {
           const message = error?.response?.data?.message || error?.message;
           state.notification.data.push({

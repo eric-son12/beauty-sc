@@ -1,9 +1,9 @@
 import React from "react";
-
-import "./OurBranch.scss";
 import { Button } from "@mui/material";
 
-const OurBranch: React.FC = () => {
+import "./OurBranch.scss";
+
+const OurBranch = () => {
   return (
     <div className="our-branch-container">
       <div className="our-branch-info">

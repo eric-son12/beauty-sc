@@ -11,7 +11,7 @@ import { useStore } from "../../store";
 
 import "./Login.scss";
 
-const Login: React.FC = () => {
+const Login = () => {
   const navigate = useNavigate();
   const onLogin = useStore((store) => store.login);
   const user = useStore((store) => store.profile.user);
@@ -41,7 +41,7 @@ const Login: React.FC = () => {
       const { role } = user;
       role === "ROLE_USER" ? navigate("/") : navigate("/admin/dashboard");
     }
-  }, [user]);
+  }, [user, navigate]);
 
   return (
     <div className="login-page">
@@ -52,7 +52,7 @@ const Login: React.FC = () => {
           src="/beauty-logo.svg"
           alt="logo"
           onClick={() => navigate("/")}
-          style={{marginBottom: "12px"}}
+          style={{ marginBottom: "12px" }}
         />
         {/* <h4 className="title">Đăng nhập</h4> */}
 

@@ -1,42 +1,12 @@
-import type { StoreGet, StoreSet } from "../store";
 import axios from "../utils/axiosConfig";
-import { UserProfile } from "./profile";
 
-export interface UsersState {
-  users: UserProfile[] | undefined;
-}
+const BASE_URL = `https://spacesport.pro/api`;
 
-export interface LetterVolunteer {
-  email: string;
-  fullName: string;
-  phone: string;
-  address: string;
-  status: string;
-  dob: string;
-  cccd: string;
-  experience: string;
-  currentJob: string;
-  reason: string;
-  gender: string;
-}
-
-export interface UsersActions {
-  fetchUsers: () => Promise<void>;
-  getVolunteerDetail: (userId: string) => Promise<LetterVolunteer>;
-  confirmVolunteer: (
-    userId: string,
-    status: "Accept" | "Reject"
-  ) => Promise<boolean>;
-  deactivateUser: (userId: string) => Promise<void>;
-}
-
-export const initialUsers: UsersState = {
+export const initialUsers = {
   users: undefined,
 };
 
-export function usersActions(set: StoreSet, get: StoreGet): UsersActions {
-  const BASE_URL = `https://spacesport.pro/api`;
-
+export function usersActions(set, get) {
   return {
     fetchUsers: async () => {
       set((state) => {
@@ -55,7 +25,7 @@ export function usersActions(set: StoreSet, get: StoreGet): UsersActions {
         set((state) => {
           state.users.users = userList;
         });
-      } catch (error: any) {
+      } catch (error) {
         set((state) => {
           const message = error?.response?.data?.message || error?.message;
           state.notification.data.push({
@@ -69,7 +39,7 @@ export function usersActions(set: StoreSet, get: StoreGet): UsersActions {
         });
       }
     },
-    getVolunteerDetail: async (userId: string) => {
+    getVolunteerDetail: async (userId) => {
       set((state) => {
         state.loading.isLoading = true;
       });
@@ -77,9 +47,8 @@ export function usersActions(set: StoreSet, get: StoreGet): UsersActions {
         const response = await axios.post(
           `${BASE_URL}/volunteers/detail?userId=${userId}`
         );
-        const letter = response.data?.data || undefined;
-        return letter;
-      } catch (error: any) {
+        return response.data?.data || undefined;
+      } catch (error) {
         set((state) => {
           const message = error?.response?.data?.message || error?.message;
           state.notification.data.push({
@@ -100,7 +69,7 @@ export function usersActions(set: StoreSet, get: StoreGet): UsersActions {
       try {
         const body = {
           volunteerId: userId,
-          status: status, //Waiting, Reject
+          status: status, // Waiting, Reject
         };
         await axios.post(`${BASE_URL}/volunteers/confirm`, body);
         set((state) => {
@@ -110,7 +79,7 @@ export function usersActions(set: StoreSet, get: StoreGet): UsersActions {
           });
         });
         return true;
-      } catch (error: any) {
+      } catch (error) {
         set((state) => {
           const message = error?.response?.data?.message || error?.message;
           state.notification.data.push({
@@ -125,7 +94,7 @@ export function usersActions(set: StoreSet, get: StoreGet): UsersActions {
         });
       }
     },
-    deactivateUser: async (userId: string) => {
+    deactivateUser: async (userId) => {
       set((state) => {
         state.loading.isLoading = true;
       });
@@ -137,7 +106,7 @@ export function usersActions(set: StoreSet, get: StoreGet): UsersActions {
             content: "Deactivate user successfully",
           });
         });
-      } catch (error: any) {
+      } catch (error) {
         set((state) => {
           const message = error?.response?.data?.message || error?.message;
           state.notification.data.push({

@@ -1,10 +1,10 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
-
-import "./Hero.scss";
 import { Button } from "@mui/material";
 
-const Hero: React.FC = () => {
+import "./Hero.scss";
+
+const Hero = () => {
   return (
     <div className="hero-container">
       <Carousel

@@ -1,9 +1,9 @@
 import React from "react";
-
-import "./Footer.scss";
 import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
 
-const Footer: React.FC = () => {
+import "./Footer.scss";
+
+const Footer = () => {
   return (
     <footer>
       <div className="proposition-container">

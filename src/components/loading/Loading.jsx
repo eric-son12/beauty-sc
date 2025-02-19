@@ -1,10 +1,11 @@
 import React from "react";
-
-import "./Loading.scss";
 import { Backdrop, CircularProgress } from "@mui/material";
+
 import { useStore } from "../../store";
 
-const Loading: React.FC = () => {
+import "./Loading.scss";
+
+const Loading = () => {
   const isLoading = useStore((state) => state.loading.isLoading);
 
   return (

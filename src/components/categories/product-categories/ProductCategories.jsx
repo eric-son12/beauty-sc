@@ -2,7 +2,7 @@ import React from "react";
 
 import "./ProductCategories.scss";
 
-const ProductCategories: React.FC = () => {
+const ProductCategories = () => {
   return (
     <div className="product-categories-container">
       <h2 className="title">Products’ Categories</h2>

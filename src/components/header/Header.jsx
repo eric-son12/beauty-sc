@@ -5,35 +5,20 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  IconButton,
-  InputAdornment,
-  Menu,
-  MenuItem,
   TextField,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import * as Yup from "yup";
-import PersonIcon from "@mui/icons-material/Person";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import DriveFileRenameOutlineOutlinedIcon from "@mui/icons-material/DriveFileRenameOutlineOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
-import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { useFormik } from "formik";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import * as Yup from "yup";
 
 import { useStore } from "../../store";
 
 import "./Header.scss";
 
-interface IChangePasswordForm {
-  oldPassword: string;
-  newPassword: string;
-  confirmPassword: string;
-}
-
-const Header: React.FC = () => {
+const Header = () => {
   const [open, setOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
   const [visible, setVisible] = useState(true);
 
@@ -56,9 +41,8 @@ const Header: React.FC = () => {
 
   const navigate = useNavigate();
   const logout = useStore((store) => store.logout);
-  // const setSearchKeyword = useStore((store) => store.setSearchKeyword);
 
-  const handleOpenMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleOpenMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -70,7 +54,7 @@ const Header: React.FC = () => {
     setOpen(false);
   };
 
-  const formik = useFormik<IChangePasswordForm>({
+  const formik = useFormik({
     initialValues: {
       oldPassword: "",
       newPassword: "",
@@ -85,7 +69,7 @@ const Header: React.FC = () => {
         .required("Please confirm your new password")
         .oneOf([Yup.ref("newPassword")], "Passwords must match"),
     }),
-    onSubmit: (values: any) => {
+    onSubmit: (values) => {
       changePassword(values.oldPassword, values.newPassword);
     },
   });
@@ -116,86 +100,6 @@ const Header: React.FC = () => {
             Login
           </Button>
         </div>
-
-        {/* <div className="action-group-wrap">
-          {(role === "ROLE_VOLUNTEER" || role === "ROLE_ADMIN") && (
-            <IconButton
-              style={{ color: "white", marginRight: "8px" }}
-              onClick={() => navigate("/admin/dashboard")}
-            >
-              <AdminPanelSettingsIcon />
-            </IconButton>
-          )}
-          <IconButton
-            style={{ color: "white", marginRight: "8px" }}
-            onClick={() => navigate("/notification")}
-          >
-            <NotificationsNoneOutlinedIcon />
-          </IconButton>
-          <IconButton
-            style={{ color: "white", marginRight: "8px" }}
-            onClick={() => navigate("/listing")}
-          >
-            <ArticleOutlinedIcon />
-          </IconButton>
-          <Button
-            variant="outlined"
-            className="user-btn"
-            startIcon={<PersonIcon />}
-            id="basic-button"
-            aria-controls={openMenu ? "basic-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={openMenu ? "true" : undefined}
-            onClick={handleOpenMenu}
-          />
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={openMenu}
-            onClose={handleCloseMenu}
-            MenuListProps={{
-              "aria-labelledby": "basic-button",
-            }}
-          >
-            {token ? (
-              <div>
-                <MenuItem
-                  onClick={() => {
-                    handleCloseMenu();
-                    navigate("/profile");
-                  }}
-                >
-                  Profile
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    setOpen(true);
-                  }}
-                >
-                  Change password
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    handleCloseMenu();
-                    logout();
-                    navigate("/");
-                  }}
-                >
-                  Logout
-                </MenuItem>
-              </div>
-            ) : (
-              <MenuItem
-                onClick={() => {
-                  handleCloseMenu();
-                  navigate("/login");
-                }}
-              >
-                Login
-              </MenuItem>
-            )}
-          </Menu>
-        </div> */}
       </nav>
 
       <Dialog open={open} onClose={handleClose}>

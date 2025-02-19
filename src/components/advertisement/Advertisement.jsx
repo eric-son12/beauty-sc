@@ -1,9 +1,8 @@
-import React from "react";
-
-import "./Advertisement.scss";
 import { Button } from "@mui/material";
 
-const Advertisement: React.FC = () => {
+import "./Advertisement.scss";
+
+const Advertisement = () => {
   return (
     <div className="advertisement-container">
       <div className="advertisement-info">
@@ -11,7 +10,7 @@ const Advertisement: React.FC = () => {
         <p className="sub-title">
           Looking for a full skincare routine? Our NEW Virtual Skincare Analysis
           Tool evaluates your skin and provides the most personalized
-          recommendations.{" "}
+          recommendations.
         </p>
         <div className="scan-qr-wrap">
           <div className="scan-info">
@@ -32,11 +31,9 @@ const Advertisement: React.FC = () => {
               Answer a few questions
             </Button>
           </div>
-
           <img src="advertisement-qr-code.png" alt="qr-code" />
         </div>
       </div>
-
       <img
         className="advertisement-banner"
         src="/advertisement-banner.png"

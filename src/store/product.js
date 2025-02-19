@@ -1,36 +1,14 @@
-import type { StoreGet, StoreSet } from "../store";
 import axios from "../utils/axiosConfig";
 
-export interface Product {
-  $id: string;
-  productId: number;
-  productName: string;
-  summary: string;
-  price: number;
-  discount: number;
-}
+const BASE_URL = `https://localhost:7130/api`;
 
-export interface ProductsState {
-  products: Product[];
-  bestSellersProducts: Product[];
-  newInProducts: Product[];
-}
-
-export interface ProductsActions {
-  fetchBestSellersProducts: () => Promise<void>;
-  fetchNewInProducts: () => Promise<void>;
-}
-
-export const initialProducts: ProductsState = {
+export const initialProducts = {
   products: [],
   bestSellersProducts: [],
   newInProducts: [],
 };
 
-export function productsActions(set: StoreSet, get: StoreGet): ProductsActions {
-  const BASE_URL = `https://localhost:7130/api`;
-  // https://localhost:7130/api/Product/get-new-product
-
+export function productsActions(set, get) {
   return {
     fetchBestSellersProducts: async () => {
       set((state) => {
@@ -43,7 +21,7 @@ export function productsActions(set: StoreSet, get: StoreGet): ProductsActions {
         set((state) => {
           state.products.bestSellersProducts = response.data?.$values || [];
         });
-      } catch (error: any) {
+      } catch (error) {
         set((state) => {
           const message = error?.response?.data?.message || error?.message;
           state.notification.data.push({
@@ -66,7 +44,7 @@ export function productsActions(set: StoreSet, get: StoreGet): ProductsActions {
         set((state) => {
           state.products.bestSellersProducts = response.data?.$values || [];
         });
-      } catch (error: any) {
+      } catch (error) {
         set((state) => {
           const message = error?.response?.data?.message || error?.message;
           state.notification.data.push({

@@ -13,7 +13,7 @@ import NewIn from "../../components/new-in/NewIn";
 
 import "./Home.scss";
 
-const Home: React.FC = () => {
+const Home = () => {
   return (
     <>
       <Header />

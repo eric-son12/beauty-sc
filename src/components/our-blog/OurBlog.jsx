@@ -3,7 +3,7 @@ import Carousel from "react-multi-carousel";
 
 import "./OurBlog.scss";
 
-const OurBlog: React.FC = () => {
+const OurBlog = () => {
   return (
     <div className="our-blog-container">
       <h2 className="title">Our Blog</h2>

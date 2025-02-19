@@ -4,16 +4,16 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
+import { useMemo } from "react";
 
+import { useStore } from "./store";
 import theme from "./theme";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
-
-import "./App.css";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Loading from "./components/loading/Loading";
-import { useStore } from "./store";
-import { useMemo } from "react";
+
+import "./App.css";
 
 function App() {
   const user = useStore((store) => store.profile.user);

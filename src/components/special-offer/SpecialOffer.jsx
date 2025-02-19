@@ -1,9 +1,9 @@
 import React from "react";
-
-import "./SpecialOffer.scss";
 import { Button } from "@mui/material";
 
-const SpecialOffer: React.FC = () => {
+import "./SpecialOffer.scss";
+
+const SpecialOffer = () => {
   return (
     <div className="special-offer-container">
       <img
