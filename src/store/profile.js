@@ -1,10 +1,9 @@
 import axios from "../utils/axiosConfig";
 
-const BASE_URL = "https://spacesport.pro/api";
+const BASE_URL = "https://localhost:7130/api";
 
 export const initialProfile = {
   user: undefined,
-  userProfile: undefined,
   error: undefined,
 };
 
@@ -114,19 +113,17 @@ export function profileActions(set, get) {
         state.loading.isLoading = true;
       });
       try {
-        const response = await axios.post(`${BASE_URL}/login`, {
+        const response = await axios.post(`${BASE_URL}/Authentication/login`, {
           username,
           password,
         });
-        const token = response.data?.data?.token;
-        const role = response.data?.data?.role;
-        const user = response.data?.data;
+        const token = response.data?.token;
+        const expirationTime = response.data?.expirationTime;
         if (token) {
-          localStorage.setItem("role", role);
           localStorage.setItem("token", token);
+          localStorage.setItem("expirationTime", expirationTime);
         }
         set((state) => {
-          state.profile.user = user;
           state.notification.data.push({
             content: response.data.message,
             status: "SUCCESS",
@@ -139,6 +136,8 @@ export function profileActions(set, get) {
             status: "ERROR",
             content: message,
           });
+          state.profile.error = false;
+          console.log(error, state.profile.error);
         });
       } finally {
         set((state) => {

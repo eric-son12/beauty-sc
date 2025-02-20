@@ -12,6 +12,8 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Loading from "./components/loading/Loading";
+import SkinTestQuiz from "./pages/quiz/SkinTestQuiz";
+import Notification from "./components/notification/Notification";
 
 import "./App.css";
 
@@ -38,6 +40,10 @@ function App() {
       element: <Home />,
     },
     {
+      path: "take-quiz",
+      element: <SkinTestQuiz />,
+    },
+    {
       path: "admin/dashboard",
       element: (
         <ProtectedRoute
@@ -58,6 +64,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <RouterProvider router={router} />
       <Loading />
+      <Notification />
     </ThemeProvider>
   );
 }
