@@ -23,6 +23,7 @@ const Header = () => {
   const [visible, setVisible] = useState(true);
 
   const changePassword = useStore((store) => store.changePassword);
+  const user = useStore((store) => store.profile.user);
 
   const token = localStorage.getItem("token");
   const openMenu = Boolean(anchorEl);
@@ -87,8 +88,8 @@ const Header = () => {
           <a href="">Voucher</a>
           <a href="">For Sales</a>
           <a href="">Products</a>
-          <a href="/take-quiz">Quiz Skin Q&A</a>
-          {/* <a href={token ? "/take-quiz" : "login"}>Quiz Skin Q&A</a> */}
+          {/* <a href="/take-quiz">Quiz Skin Q&A</a> */}
+          <a href={token ? "/take-quiz" : "/login"}>Quiz Skin Q&A</a>
         </div>
 
         <div className="searchbar-wrap">
@@ -97,9 +98,20 @@ const Header = () => {
             <img src="" alt="" />
             US <span>(EN)</span>
           </div>
-          <Button variant="text" href="/login">
-            Login
-          </Button>
+          {
+            token ?
+              (
+                <Button variant="text" onClick={logout}>
+                  Logout
+                </Button>
+              ) : (
+                <Button variant="text" href="/login">
+                  Login
+                </Button>
+              )
+          }
+
+
         </div>
       </nav>
 
