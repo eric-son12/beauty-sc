@@ -92,7 +92,7 @@ const Header = () => {
             href=""
             onClick={() => {
               addItem({
-                id$: 1,
+                productId: 1,
                 productName:
                   'Màn hình ASUS TUF GAMING VG27AQ1A 27" IPS 2K 170Hz G-Sync HDR chuyên game',
                 price: 4890000,
